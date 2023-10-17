@@ -1,8 +1,9 @@
 import pandas as pd
 import numpy as np
 from sklearn.tree import DecisionTreeRegressor
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.preprocessing import StandardScaler, OneHotEncoder,OrdinalEncoder
 import streamlit as st
+import pickle
 import re
 st.set_page_config(layout="wide")
 
@@ -70,25 +71,23 @@ with tab1:
              
         if submit_button and flag==0:
             
-            import pickle
-            with open(r"source/model.pkl", 'rb') as file:
-                loaded_model = pickle.load(file)
-            with open(r'source/scaler.pkl', 'rb') as f:
+            with open(r"Models/ROE.pkl", 'rb') as f:
+                OE = pickle.load(f)
+            
+            with open(r'Models/RStandardScaler.pkl', 'rb') as f:
                 scaler_loaded = pickle.load(f)
-
-            with open(r"source/t.pkl", 'rb') as f:
-                t_loaded = pickle.load(f)
-
-            with open(r"source/s.pkl", 'rb') as f:
-                s_loaded = pickle.load(f)
-
-            new_sample= np.array([[np.log(float(quantity_tons)),application,np.log(float(thickness)),float(width),country,float(customer),int(product_ref),item_type,status]])
-            new_sample_ohe = t_loaded.transform(new_sample[:, [7]]).toarray()
-            new_sample_be = s_loaded.transform(new_sample[:, [8]]).toarray()
-            new_sample = np.concatenate((new_sample[:, [0,1,2, 3, 4, 5, 6,]], new_sample_ohe, new_sample_be), axis=1)
+                
+            with open(r"Models/Reg_model.pkl", 'rb') as file:
+                loaded_model = pickle.load(file)
+            
+            # ['quantity tons','status','item type','application','thickness','width','country','customer','product_ref']
+            val = OE.transform([[status,item_type]])
+            status,item_type = val.squeeze()
+            
+            new_sample= np.array([[np.log(float(quantity_tons)),status,item_type,application,np.log(float(thickness)),float(width),country,float(customer),int(product_ref)]])
             new_sample1 = scaler_loaded.transform(new_sample)
             new_pred = loaded_model.predict(new_sample1)[0]
-            st.write('## :purple[Predicted selling price:] ', np.exp(new_pred))
+            st.write('## :purple[Predicted selling price:] ' , str(np.exp(new_pred)))
             
 with tab2: 
     
@@ -125,27 +124,50 @@ with tab2:
                 st.write("You have entered an invalid value: ",k)  
              
         if csubmit_button and cflag==0:
-            import pickle
-            with open(r"source/cmodel.pkl", 'rb') as file:
+            
+            with open(r"Models/Cmodel.pkl", 'rb') as file:
                 cloaded_model = pickle.load(file)
 
-            with open(r'source/cscaler.pkl', 'rb') as f:
+            with open(r'Models/CStandardScaler.pkl', 'rb') as f:
                 cscaler_loaded = pickle.load(f)
 
-            with open(r"source/ct.pkl", 'rb') as f:
+            with open(r"Models/COE.pkl", 'rb') as f:
                 ct_loaded = pickle.load(f)
 
+            with open(r"Models/up_low_IQR.pkl", 'rb') as f:
+                IQR = pickle.load(f)
+            
+            columns = ['quantity tons','thickness','width'] 
+            
+            cquantity_tons = float(cquantity_tons)
+            upq,lbq = IQR['quantity tons']
+            cquantity_tons = upq if cquantity_tons > upq else cquantity_tons
+            cquantity_tons = lbq if cquantity_tons < lbq else cquantity_tons
+
+            cthickness = float(cthickness)
+            upt,lbt = IQR['thickness']
+            cthickness = upt if cthickness > upq else cthickness
+            cthickness = lbt if cthickness < lbq else cthickness
+
+            cwidth = float(cwidth)
+            upw,lbw = IQR['quantity tons']
+            cwidth = upw if cwidth > upq else cwidth
+            cwidth = lbw if cwidth < lbq else cwidth
+
             # Predict the status for a new sample
-            # 'quantity tons_log', 'selling_price_log','application', 'thickness_log', 'width','country','customer','product_ref']].values, X_ohe
-            new_sample = np.array([[np.log(float(cquantity_tons)), np.log(float(cselling)), capplication, np.log(float(cthickness)),float(cwidth),ccountry,int(ccustomer),int(product_ref),citem_type]])
-            new_sample_ohe = ct_loaded.transform(new_sample[:, [8]]).toarray()
-            new_sample = np.concatenate((new_sample[:, [0,1,2, 3, 4, 5, 6,7]], new_sample_ohe), axis=1)
+            # ['quantity tons','selling_price','item type','application','thickness','width','country','customer','product_ref']]
+            
+            val = ct_loaded.transform([[citem_type]])
+            citem_type = val.squeeze()
+            
+            new_sample = np.array([[cquantity_tons,float(cselling),citem_type,capplication,cthickness,cwidth,ccountry,int(ccustomer),int(product_ref)]])
             new_sample = cscaler_loaded.transform(new_sample)
             new_pred = cloaded_model.predict(new_sample)
             if new_pred==1:
                 st.write('## :green[The Status is Won] ')
             else:
                 st.write('## :red[The status is Lost] ')
-                
-st.write( f'<h6 style="color:rgb(0, 153, 153,0.35);">App Created by TulasiNND</h6>', unsafe_allow_html=True )  
+
+
+st.write( f'<h6 style="color:rgb(0, 153, 153,0.35);">App Created by Ajin</h6>', unsafe_allow_html=True )  
 
