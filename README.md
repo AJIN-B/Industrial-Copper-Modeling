@@ -3,52 +3,43 @@
 
 ## Overview
 
-Industrial Copper Modeling is a comprehensive process for creating and simulating copper-based industrial 
-models. This method involves the utilization of advanced software tools and techniques to design and 
-analyze various aspects of copper-based industrial systems. The primary objective is to provide a detailed 
-and accurate representation of industrial processes related to copper production, refining, and utilization.
+This project aims to develop two machine learning models for the copper industry to 
+address the challenges of predicting selling price and lead classification.
+**ML Regression model** which predicts continuous variable of **Selling_Price**.
+**ML Classification model** which predicts **Status: WON or LOST**.
+Creating a streamlit page where you can insert each column value and you will get 
+the Selling_Price predicted value or Status(Won/Lost).
 
-## Features
 
-1. **Design Flexibility**: Industrial Copper Modeling offers a high degree of design flexibility, 
-allowing users to create intricate models tailored to specific industrial requirements.
+## Dataset Overview
 
-2. **Simulation Capabilities**: The platform enables the simulation of complex copper-related processes, 
-facilitating the analysis of various scenarios and the prediction of potential outcomes.
+The copper industry deals with less complex data related to sales and pricing.
+However, this data may suffer from issues such as skewness and noisy data, 
+which can affect the accuracy of manual predictions. Dealing with these challenges 
+manually can be time-consuming and may not result in optimal pricing decisions. 
+By utilizing advanced techniques such as data normalization, feature scaling, and outlier detection, and 
+leveraging algorithms that are robust to skewed and noisy data.
 
-3. **Resource Optimization**: By integrating resource optimization algorithms, Industrial Copper Modeling 
-assists in enhancing the efficiency of industrial operations, leading to improved resource utilization and 
-cost-effectiveness.
+### Approach 
 
-4. **Data Analysis Tools**: The software includes powerful data analysis tools that enable users to 
-interpret and visualize data generated during the modeling process, facilitating informed decision-making.
+- Data Understanding: Identify the types of variables (continuous, categorical) and their distributions. 
+- Data Preprocessing: 
+    - Handle missing values with mean/median/mode.
+    - Treat Outliers using IQR or Isolation Forest from sklearn library.
+    - Identify Skewness in the dataset and treat skewness with appropriate data transformations,
+    - Encode categorical variables  as one-hot encoding, label encoding, or ordinal encoding, based on their nature and relationship with the target variable.
 
-5. **Customizable Reporting**: Users can generate customizable reports and presentations based on the 
-modeling results, facilitating effective communication and collaboration within industrial teams 
-and stakeholders.
+- EDA: visualizing outliers and skewness(before and after treating skewness) using Seaborn’s boxplot, distplot, violinplot.
+- Feature Engineering: Engineer new features if applicable, such as aggregating or transforming existing features to create more informative representations of the data. 
 
-6. **Interoperability**: The system supports interoperability with various industry-standard software, 
-ensuring seamless integration into existing industrial workflows.
+### Model Building and Evaluation:
+- Split the dataset into training and testing/validation sets. 
+- Train and evaluate different classification models, such as ExtraTreesClassifier, XGBClassifier, or Logistic Regression, using appropriate evaluation metrics such as accuracy, precision, recall, F1 score, and AUC curve. 
+- Optimize model hyperparameters using techniques such as cross-validation and grid search to find the best-performing model.
+- Interpret the model results and assess its performance based on the defined problem statement.
+- Same steps for Regression modelling.
 
-## Benefits
 
-- **Enhanced Efficiency**: By accurately modeling industrial processes, the system helps in identifying 
-areas for optimization and efficiency improvement, leading to increased productivity and reduced operational costs.
-
-- **Risk Mitigation**: Industrial Copper Modeling aids in the identification of potential risks and 
-challenges within the copper production and utilization chain, allowing proactive measures to be taken to minimize disruptions.
-
-- **Informed Decision-Making**: With the aid of detailed simulations and comprehensive 
-data analysis, stakeholders can make well-informed decisions regarding industrial processes, investments, and resource allocation.
-
-- **Sustainable Practices**: The modeling process promotes the adoption of sustainable practices 
-by optimizing resource usage and minimizing environmental impact, thereby contributing to sustainable industrial development.
-
-## Usage
-
-Industrial Copper Modeling can be used by professionals in the copper mining, metallurgy, and 
-manufacturing industries to optimize operations, improve productivity, and make informed decisions 
-based on comprehensive data analysis and simulations.
 
 ## Installation
 
