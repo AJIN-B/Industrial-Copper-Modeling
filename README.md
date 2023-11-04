@@ -61,10 +61,7 @@ leveraging algorithms that are robust to skewed and noisy data.
 
 ### Contact
 
-- Name : Ajin B
-
-- GITHUB : https://github.com/AJIN-B
-
-- LINKEDIN: https://www.linkedin.com/in/ajin-b-0851191b0/
-
-- Mail : ajinleo9940@gmail.com
+- Name     : Ajin B
+- GITHUB   : https://github.com/AJIN-B
+- LINKEDIN : https://www.linkedin.com/in/ajin-b-0851191b0/
+- Mail     : ajin.b.edu@gmail.com
