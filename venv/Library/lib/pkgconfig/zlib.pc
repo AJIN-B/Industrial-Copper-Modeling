@@ -1,0 +1,13 @@
+prefix=E:/Github/Industrial-Copper-Modeling/venv/Library
+exec_prefix=E:/Github/Industrial-Copper-Modeling/venv/Library
+libdir=E:/Github/Industrial-Copper-Modeling/venv/Library/lib
+sharedlibdir=E:/Github/Industrial-Copper-Modeling/venv/Library/lib
+includedir=E:/Github/Industrial-Copper-Modeling/venv/Library/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.2.13
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}
