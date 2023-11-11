@@ -1,0 +1,9 @@
+## ignoring .env file  
+.env
+
+# ignoring venv folder  
+venv
+
+# files not using
+trypy.py
+refer.txt
