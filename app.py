@@ -1,11 +1,18 @@
-import pandas as pd
-import numpy as np
+
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.preprocessing import StandardScaler, OneHotEncoder,OrdinalEncoder
 import streamlit as st
+import pandas as pd
+import numpy as np
+import warnings
 import pickle
 import re
-st.set_page_config(layout="wide")
+
+warnings.filterwarnings('ignore', category=UserWarning)
+warnings.filterwarnings('ignore', category=RuntimeWarning)
+warnings.filterwarnings('ignore', category=FutureWarning)
+
+st.set_page_config(layout="wide",menu_items={'About': """### This app is created by *AJIN B*"""})
 
 st.write("""
 <div style='text-align:center'>
