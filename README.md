@@ -43,6 +43,12 @@ the predicted value of **Selling_Price  or Status(Won/Lost)**.
     <img src="https://www.solivatech.com/assets/uploads/media-uploader/scikit-learn1624452317.png" alt="streamlit" width="70" height="40"/>
   </a>
 
+  <!-- Matplotlib -->
+  <a href="https://streamlit.io/" target="_blank" rel="noreferrer">
+    <img src="https://studyopedia.com/wp-content/uploads/2022/12/Matplotlib-featured-image-studyopedia.png" alt="streamlit" width="70" height="40"/>
+  </a>
+
+
 ## Dataset Overview
 The copper industry deals with less complex data related to sales and pricing.
 However, this data may suffer from issues such as **skewness** and noisy data, 
