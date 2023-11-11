@@ -9,7 +9,7 @@ address the challenges of predicting selling price and lead classification.
 Created a **streamlit page** where you can insert each column value and you will get 
 the predicted value of **Selling_Price  or Status(Won/Lost)**.
 
-### Project host [link](https://industrial-copper-modeling-5azw95rdf9xkq7bz4bszyu.streamlit.app/)
+### Project host [link](https://industrial-copper-modeling-9acktelku6oxgjlrpgmm6k.streamlit.app/)
 
 <h3 align="left">Languages and Tools:</h3>
 <p align="left">
